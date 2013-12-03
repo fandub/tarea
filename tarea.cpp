@@ -20,7 +20,6 @@ int main(int argc, char *argv[])
 
     if (PQstatus(cnn) != CONNECTION_BAD) 
     {
-        cout << "\tConexion Establecida" << endl;
         res = PQexec(cnn,"SELECT curso_id, AVG(nota) as Ranking FROM asignaturas_cursadas where curso_id = (SELECT curso_id, docente_id as Docente FROM cursos GROUP BY docente_id)");
 
         if (res != NULL) 
@@ -30,15 +29,18 @@ int main(int argc, char *argv[])
 
             cout << "Columnas" << endl << endl;
 
-            for (i=0; i<columnas; i++) {
+            for (i=0; i<columnas; i++) 
+            {
                 cout << PQfname(res,i) << "\t\t|\t\t";
             }
 
             cout << endl;
 
 
-            for (i=0; i<filas; i++) {
-                for (int j=0; j<columnas; j++) {
+            for (i=0; i<filas; i++) 
+            {
+                for (int j=0; j<columnas; j++) 
+                {
                     cout << PQgetvalue(res,i,j) << "\t\t\t";
                 }
                 cout << endl;
